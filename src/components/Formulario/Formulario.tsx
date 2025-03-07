@@ -1,11 +1,11 @@
-import React from "react";
-import Botao from "../Botao";
+import Botao from "../Botao/Botao";
+import style from "./Formulario.module.scss";
 
-export default class Formulario extends React.Component {
-  render() {
-    return (
-      <form>
-        <div>
+export default function Formulario() {
+  return (
+    <>
+      <form className={style.novaTarefa}>
+        <div className={style.inputContainer}>
           <label htmlFor="tarefa">Adicione um novo estudo</label>
           <input
             type="text"
@@ -15,7 +15,7 @@ export default class Formulario extends React.Component {
             required
           />
         </div>
-        <div>
+        <div className={style.inputContainer}>
           <label htmlFor="tempo">Tempo</label>
           <input
             type="time"
@@ -29,6 +29,6 @@ export default class Formulario extends React.Component {
         </div>
         <Botao />
       </form>
-    );
-  }
+    </>
+  );
 }

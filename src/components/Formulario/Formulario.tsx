@@ -1,14 +1,31 @@
 import { useState } from "react";
 import Botao from "../Botao/Botao";
 import style from "./Formulario.module.scss";
+import { ITarefa } from "../../types/tarefa";
+import { v4 as uuidv4 } from "uuid";
 
-export default function Formulario() {
+export default function Formulario({
+  setTarefas,
+}: {
+  setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>;
+}) {
   const [tarefa, setTarefa] = useState("");
   const [tempo, setTempo] = useState("00:00");
 
   function adicionarTarefa(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("State: ", { tarefa, tempo });
+    setTarefas((tarefasAntigas) => [
+      ...tarefasAntigas,
+      {
+        tarefa,
+        tempo,
+        selecionado: false,
+        completado: false,
+        id: uuidv4(),
+      },
+    ]);
+    setTarefa("");
+    setTempo("00:00");
   }
   return (
     <>
@@ -43,7 +60,7 @@ export default function Formulario() {
             required
           />
         </div>
-        <Botao>Adicionar</Botao>
+        <Botao type="submit">Adicionar</Botao>
       </form>
     </>
   );
